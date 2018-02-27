@@ -6,12 +6,22 @@ white = (255,255,255)
 win = False
 wrong = 0
 guess = 1
-a = "_ "
-p = "_ "
-l = "_ "
-e = "_"
-
-print("The word is 5 letters long.")
+correct = False
+word = []
+wordg = []
+wordp = ("")
+length = int(input("Enter the length of your word: "))
+count = 1
+while count <= length:
+    letter = input("Enter letter number " + str(count) + ": ")
+    count += 1
+    word.append(letter)
+count = 1
+while count <= length:
+    wordg.append("_")
+    count += 1
+print("\n" * 50)
+print("The word is " + str(length) + " letters long.")
 run = True
 while run:
     for event in pygame.event.get():
@@ -23,32 +33,35 @@ while run:
     pygame.draw.line(window,white,(350,50),(350,75),5)
     pygame.display.flip()
     print()
-    print(a + p + p + l + e)
+    count = 1
+    wordp = ("")
+    while count <= length:
+        wordp += wordg[(count - 1)]
+        wordp += " "
+        count += 1
+    count = 1
+    print(wordp)
     print()
     print("This is guess number " + str(guess) + ".")
     answer = input("Enter your guess: ")
-    print()
-    print()
-    print()
-    if answer == "a":
+    print("\n" * 2)
+    count = 1
+    while count <= length:
+        if answer == word[(count - 1)]:
+            wordg[(count - 1)] = answer
+            correct = True
+        count += 1
+    count = 1
+    if correct:
         print("Correct!")
-        a = "a "
-    elif answer == "p":
-        print("Correct!")
-        p = "p "
-    elif answer == "l":
-        print("Correct!")
-        l = "l "
-    elif answer == "e":
-        print("Correct!")
-        e = "e "
-    else:
+    elif not correct:
         print("Incorrect")
         wrong += 1
         if wrong > 1:
             print("You have " + str(wrong) + " failed attempts.")
         elif wrong == 1:
             print("You have 1 failed attempt.")
+    correct = False
     if wrong >= 1:
         pygame.draw.circle(window,white,(350,110),35,5)
     if wrong >= 2:
@@ -62,16 +75,27 @@ while run:
     if wrong >= 6:
         pygame.draw.line(window,white,(350,270),(400,365),5)
     guess += 1
-    if (a + p + p + l + e) == "a p p l e ":
+    if word == wordg:
         win = True
         run = False
     if wrong == 6:
         run = False
     pygame.display.flip()
 print()
+wordp = ("")
 if win:
-    print(a + p + p + l + e)
+    while count <= length:
+        wordp += word[(count - 1)]
+        count += 1
+    print("Word: " + wordp)
+    count = 1
     print()
     print("You won!")
 else:
+    while count <= length:
+        wordp += word[(count - 1)]
+        count += 1
+    print("Word: " + wordp)
+    count = 1
+    print()
     print("You failed.")
