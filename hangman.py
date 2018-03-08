@@ -9,6 +9,8 @@ guess = 1
 correct = False
 word = []
 wordg = []
+letters = []
+lettersp = ("")
 wordp = ("")
 length = int(input("Enter the length of your word: "))
 count = 1
@@ -42,8 +44,16 @@ while run:
     count = 1
     print(wordp)
     print()
+    if guess > 1:
+        print("Letters guessed: " + lettersp)
+    print()
     print("This is guess number " + str(guess) + ".")
     answer = input("Enter your guess: ")
+    if guess == 1:
+        letters.append(answer)
+    else:
+        letters.append((", " + answer))
+    lettersp += (letters[guess - 1])
     print("\n" * 2)
     count = 1
     while count <= length:
