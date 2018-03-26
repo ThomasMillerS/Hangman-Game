@@ -12,12 +12,11 @@ wordg = []
 letters = []
 lettersp = ("")
 wordp = ("")
-length = int(input("Enter the length of your word: "))
-count = 1
-while count <= length:
-    letter = input("Enter letter number " + str(count) + ": ")
-    count += 1
-    word.append(letter)
+entered = input("Enter your word: ")
+for i,c in enumerate(entered):
+    length = i + 1
+    word.append(c)
+print(word)
 count = 1
 while count <= length:
     wordg.append("_")
